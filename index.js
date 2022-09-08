@@ -20,6 +20,9 @@ const upload = multer({ storage });
 
 app.use(express.static(path.join(__dirname, "public")));
 
+app.get("/", (req, res) => {
+  return res.send(`Hello from nodejs`);
+});
 app.post("/profile", upload.single("avatar"), function (req, res, next) {
   console.log(`${req.fileName}`);
   res.send(`<h1>file has been uploaded successfully :D</h1>
