@@ -18,7 +18,13 @@
   </head>
   <body>
     <form action="/profile" method="post" enctype="multipart/form-data">
-      <input type="file" name="avatar" />
+      <label>Upload Single file</label>
+      <input type="file" name="single" />
+      <button type="submit">sumbit</button>
+    </form>
+    <form action="/profile-array" method="post" enctype="multipart/form-data">
+      <label>Upload Multiple files</label>
+      <input type="file" name="multiple" multiple />
       <button type="submit">sumbit</button>
     </form>
   </body>
