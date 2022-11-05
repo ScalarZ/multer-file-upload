@@ -10,7 +10,6 @@ const storage1 = multer.diskStorage({
     cb(null, path.join(__dirname, "public", "uploads1"));
   },
   filename: function (req, file, cb) {
-    console.log("singleFile");
     const id = Date.now() + "-" + Math.round(Math.random() * 1e9);
     const fileName = file.fieldname + "-" + id + "-" + file.originalname;
     req.fileName = fileName;
@@ -28,7 +27,6 @@ const storage2 = multer.diskStorage({
     cb(null, path.join(__dirname, "public", "uploads2"));
   },
   filename: function (req, file, cb) {
-    console.log(file);
     const id = Date.now() + "-" + Math.round(Math.random() * 1e9);
     const fileName = file.fieldname + "-" + id + "-" + file.originalname;
     req.filesName.push(fileName);
@@ -40,7 +38,6 @@ const uploadSingleFile = multer({ storage: storage1 });
 const uploadMultipleFiles = multer({ storage: storage2 });
 
 app.post("/profile", uploadSingleFile.single("single"), function (req, res) {
-  console.log(req.fileName);
   res.send(`<h1>file has been uploaded successfully :D</h1>
             <img src="./uploads1/${req.fileName}" style="width:200px; height:200px; object-fit:cover" alt="photo"/>`);
 });
@@ -49,7 +46,6 @@ app.post(
   "/profile-array",
   uploadMultipleFiles.array("multiple"),
   function (req, res) {
-    console.log(req.filesName);
     res.send(`<h1>file has been uploaded successfully :D</h1>
     ${req.filesName.map(
       (fileName) =>
